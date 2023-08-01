@@ -15,7 +15,9 @@ param(
     [Parameter(Mandatory=$True)]
     [string]$appSecret_DEV,
     [Parameter(Mandatory=$True)]
-    [string]$tenantId_DEV
+    [string]$tenantId_DEV,
+    [Parameter(Mandatory=$True)]
+    [string]$ImportPath
 )
 
 # Add environment variables to be used by Connect-MgGraph.
@@ -137,8 +139,6 @@ $Resource = "deviceManagement/deviceCompliancePolicies"
 
 
 ####################################################
-
-$ImportPath = Read-Host -Prompt "Please specify a path to a JSON file to import data from e.g. C:\IntuneOutput\Policies\policy.json"
 
 # Replacing quotes for Test-Path
 $ImportPath = $ImportPath.replace('"','')
