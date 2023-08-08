@@ -205,25 +205,7 @@ $ExportPath
 
     if(!(Test-Path "$ExportPath")){
 
-    Write-Host
-    Write-Host "Path '$ExportPath' doesn't exist, do you want to create this directory? Y or N?" -ForegroundColor Yellow
-
-    $Confirm = read-host
-
-        if($Confirm -eq "y" -or $Confirm -eq "Y"){
-
-        new-item -ItemType Directory -Path "$ExportPath" | Out-Null
-        Write-Host
-
-        }
-
-        else {
-
-        Write-Host "Creation of directory path was cancelled..." -ForegroundColor Red
-        Write-Host
-        break
-
-        }
+        Write-Host "Path '$ExportPath' doesn't exist, creating it" 
 
     }
 
