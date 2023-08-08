@@ -26,7 +26,7 @@ $Env:AZURE_TENANT_ID = $TenantID #Id of your tenant
 $Env:AZURE_CLIENT_SECRET = $ApplicationSecret #secret of the client app
 
 # Tell Connect-MgGraph to use your environment variables.
-Connect-MgGraph -EnvironmentVariable​
+Connect-MgGraph -EnvironmentVariable
 
 ####################################################
 
