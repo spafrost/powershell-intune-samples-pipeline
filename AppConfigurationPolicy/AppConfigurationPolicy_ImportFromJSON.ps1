@@ -324,59 +324,7 @@ $Resource = "deviceAppManagement/mobileAppConfigurations"
 
 ####################################################
 
-#region Authentication
-
-Write-Host
-
-# Checking if authToken exists before running authentication
-if($global:authToken){
-
-    # Setting DateTime to Universal time to work in all timezones
-    $DateTime = (Get-Date).ToUniversalTime()
-
-    # If the authToken exists checking when it expires
-    $TokenExpires = ($authToken.ExpiresOn.datetime - $DateTime).Minutes
-
-        if($TokenExpires -le 0){
-
-        Write-Host "Authentication Token expired" $TokenExpires "minutes ago" -ForegroundColor Yellow
-        Write-Host
-
-            # Defining User Principal Name if not present
-
-            if($User -eq $null -or $User -eq ""){
-
-            $User = Read-Host -Prompt "Please specify your user principal name for Azure Authentication"
-            Write-Host
-
-            }
-
-        $global:authToken = Get-AuthToken -User $User
-
-        }
-}
-
-# Authentication doesn't exist, calling Get-AuthToken function
-
-else {
-
-    if($User -eq $null -or $User -eq ""){
-
-    $User = Read-Host -Prompt "Please specify your user principal name for Azure Authentication"
-    Write-Host
-
-    }
-
-# Getting the authorization token
-$global:authToken = Get-AuthToken -User $User
-
-}
-
-#endregion
-
 ####################################################
-
-$ImportPath = Read-Host -Prompt "Please specify a path to a JSON file to import data from e.g. C:\IntuneOutput\Policies\policy.json"
 
 # Replacing quotes for Test-Path
 $ImportPath = $ImportPath.replace('"','')

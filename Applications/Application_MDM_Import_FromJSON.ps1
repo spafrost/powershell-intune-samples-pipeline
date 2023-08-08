@@ -8,7 +8,25 @@ See LICENSE in the project root for license information.
 
 ####################################################
 
+# Get parameters for authentication from pipeline passed parameters
+param(
+    [Parameter(Mandatory=$True)]
+    [string]$ApplicationID,
+    [Parameter(Mandatory=$True)]
+    [string]$ApplicationSecret,
+    [Parameter(Mandatory=$True)]
+    [string]$TenantID,
+    [Parameter(Mandatory=$True)]
+    [string]$ImportPath
+)
 
+# Add environment variables to be used by Connect-MgGraph.
+$Env:AZURE_CLIENT_ID = $ApplicationID #application id of the client app
+$Env:AZURE_TENANT_ID = $TenantID #Id of your tenant
+$Env:AZURE_CLIENT_SECRET = $ApplicationSecret #secret of the client app
+
+# Tell Connect-MgGraph to use your environment variables.
+Connect-MgGraph -EnvironmentVariable​
 
 ####################################################
 
@@ -167,8 +185,6 @@ $global:authToken = Get-AuthToken -User $User
 #endregion
 
 ####################################################
-
-$ImportPath = Read-Host -Prompt "Please specify a path to a JSON file to import data from e.g. C:\IntuneOutput\Policies\policy.json"
 
 # Replacing quotes for Test-Path
 $ImportPath = $ImportPath.replace('"','')
