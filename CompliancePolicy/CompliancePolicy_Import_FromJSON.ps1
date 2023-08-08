@@ -9,21 +9,22 @@ See LICENSE in the project root for license information.
 
 ####################################################
 
+# Get parameters for authentication from pipeline passed parameters
 param(
     [Parameter(Mandatory=$True)]
-    [string]$appId_DEV,
+    [string]$ApplicationID,
     [Parameter(Mandatory=$True)]
-    [string]$appSecret_DEV,
+    [string]$ApplicationSecret,
     [Parameter(Mandatory=$True)]
-    [string]$tenantId_DEV,
+    [string]$TenantID,
     [Parameter(Mandatory=$True)]
     [string]$ImportPath
 )
 
 # Add environment variables to be used by Connect-MgGraph.
-$Env:AZURE_CLIENT_ID = $appId_DEV #application id of the client app
-$Env:AZURE_TENANT_ID = $tenantId_DEV #Id of your tenant
-$Env:AZURE_CLIENT_SECRET = $appSecret_DEV #secret of the client app
+$Env:AZURE_CLIENT_ID = $ApplicationID #application id of the client app
+$Env:AZURE_TENANT_ID = $TenantID #Id of your tenant
+$Env:AZURE_CLIENT_SECRET = $ApplicationSecret #secret of the client app
 
 # Tell Connect-MgGraph to use your environment variables.
 Connect-MgGraph -EnvironmentVariable​
