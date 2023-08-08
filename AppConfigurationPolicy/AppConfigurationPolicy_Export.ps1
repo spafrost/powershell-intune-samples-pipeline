@@ -57,6 +57,7 @@ $Resource = "deviceAppManagement/targetedManagedAppConfigurations?`$expand=apps"
     catch {
 
     $ex = $_.Exception
+    Write-Host $ex.message
     $errorResponse = $ex.Response.GetResponseStream()
     $reader = New-Object System.IO.StreamReader($errorResponse)
     $reader.BaseStream.Position = 0
@@ -93,7 +94,7 @@ $Resource = "deviceAppManagement/mobileAppConfigurations"
    try{
         
         $uri = "https://graph.microsoft.com/$graphApiVersion/$($Resource)"
-        (Invoke-RestMethod -Uri $uri -Headers $authToken -Method Get).Value 
+        (Invoke-MgGraphRequest -Uri $uri -Method Get).Value 
         
     }
     
@@ -142,7 +143,7 @@ $Resource = "deviceAppManagement/mobileApps?`$filter=id eq '$GUID'"
    try{
         
         $uri = "https://graph.microsoft.com/$graphApiVersion/$($Resource)"
-        (Invoke-RestMethod -Uri $uri -Headers $authToken -Method Get).value
+        (Invoke-MgGraphRequest -Uri $uri -Method Get).value
         
     }
     
